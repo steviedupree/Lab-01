@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-private MyCountDownTimer countDownTimer;
-private long timeElapsed;
-private boolean timerHasStarted = false;
-private Button startB;
-private TextView text;
-private TextView timeElapsedView;
-private final long startTime = 50 * 1000;
-private final long interval = 1 * 1000;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private MyCountDownTimer countDownTimer;
+    private long timeElapsed;
+    private boolean timerHasStarted = false;
+    private Button startB;
+    private TextView text;
+    private TextView timeElapsedView;
+    private final long startTime = 50 * 1000;
+    private final long interval = 1 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +29,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(!timerHasStarted) {
+        if (!timerHasStarted) {
             countDownTimer.start();
             timerHasStarted = true;
             startB.setText("Start");
-        }
-        else {
+        } else {
             countDownTimer.cancel();
             timerHasStarted = false;
             startB.setText("Reset");
         }
     }
+
     class CountDownTimer extends MainActivity {
         public CountDownTimer(long millisInFuture, long countDownInterval) {
 
-            public void onFinish() {
+            static void onFinish() {
                 text.setText("Time's up!");
                 timeElapsedView.setText("Time Elapsed: " + String.valueOf(startTime));
             }
 
-            public void onTick() {
-            text.setText("Time remain: " + millisUntilFinished);
-            timeElapsed = startTime - millisUntilFinished;
-            timeElapsedView.setText("Time Elapsed: " + String.valueOf(timeElapsed));
+            static void onTick() {
+                text.setText("Time remain: " + millisUntilFinished);
+                timeElapsed = startTime - millisUntilFinished;
+                timeElapsedView.setText("Time Elapsed: " + String.valueOf(timeElapsed));
 
+            }
         }
+    }
 }
